@@ -1,0 +1,7 @@
+/* styles.css */
+/* Можно добавить стили для кастомизации создаваемых кнопок,
+   но базовые стили уже заданы в content.js */
+.custom-copy-button:hover {
+    opacity: 0.8;
+    transform: scale(1.02);
+}

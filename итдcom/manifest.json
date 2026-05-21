@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "ИТД Кастомизатор",
+  "version": "2.2",
+  "description": "Темы, обои, кнопки, звуки. Меню по правому Shift.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "notifications",
+    "offscreen"
+  ],
+  "host_permissions": [
+    "*://xn--d1ah4a.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://xn--d1ah4a.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["sounds/*", "offscreen.html", "offscreen.js"],
+      "matches": ["*://xn--d1ah4a.com/*"]
+    }
+  ]
+}

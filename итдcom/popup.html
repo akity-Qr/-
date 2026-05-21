@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ИТД Кастомизатор</title>
+    <style>
+        body { width: 350px; padding: 16px; font-family: sans-serif; }
+        .section { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 4px; font-weight: bold; }
+        input[type="text"], input[type="file"], textarea { width: 100%; padding: 8px; margin-bottom: 8px; box-sizing: border-box; }
+        button { padding: 8px 16px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; margin-right: 8px; }
+        button:hover { background: #45a049; }
+        .danger { background: #f44336; }
+        .danger:hover { background: #da190b; }
+    </style>
+</head>
+<body>
+<h1>Настройки ИТД</h1>
+
+<!-- 1. Блок для смены обоев -->
+<div class="section">
+    <h2>🎨 Фоновое изображение</h2>
+    <label for="wallpaperUrl">Вставьте ссылку на картинку:</label>
+    <input type="text" id="wallpaperUrl" placeholder="https://example.com/image.jpg">
+    <button id="applyWallpaperBtn">Применить обои</button>
+    <button id="resetWallpaperBtn" class="danger">Сбросить</button>
+    <p><em>Или загрузите файл:</em></p>
+    <input type="file" id="wallpaperFile" accept="image/*">
+</div>
+
+<!-- 2. Блок для настройки звука уведомлений -->
+<div class="section">
+    <h2>🔔 Звук уведомлений</h2>
+    <label for="notificationSound">Загрузите MP3 файл:</label>
+    <input type="file" id="notificationSound" accept="audio/*">
+    <button id="testSoundBtn">▶️ Проверить звук</button>
+    <button id="resetSoundBtn" class="danger">Сбросить</button>
+</div>
+
+<!-- 3. Блок управления кнопками -->
+<div class="section">
+    <h2>📋 Мои кнопки</h2>
+    <label for="newButtonName">Название кнопки:</label>
+    <input type="text" id="newButtonName" placeholder="Например: Приветствие">
+    <label for="newButtonText">Текст для копирования:</label>
+    <textarea id="newButtonText" rows="3" placeholder="Текст, который будет скопирован"></textarea>
+    <button id="addButtonBtn">➕ Добавить кнопку</button>
+    <button id="resetButtonsBtn" class="danger">Удалить все кнопки</button>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
