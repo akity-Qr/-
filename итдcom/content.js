@@ -13,30 +13,81 @@ const THEMES = {
     vk_new: {
         name: 'VK',
         css: `
-      html {
-        background: #0a0907 !important;
-        filter: invert(1) hue-rotate(180deg) contrast(120%) !important;
-        height: 100% !important;
+      /* 1. Глобальный светлый фон */
+      html, body {
+        background: #f5f6f8 !important;
       }
-      body {
-        background: #0a0907 !important;
+      
+      /* 2. ТЯЖЕЛАЯ АРТИЛЛЕРИЯ: Перекрашиваем ВСЕ блоки Nouka (посты, уведомления, карточки) */
+      body :is(div, article, aside, main, section, li, ul, form, [class*="Styled"]) {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        border-color: #e7e8ec !important;
+        box-shadow: none !important;
       }
-      body :is(h1, h2, h3, h4, h5, h6, p, span, a, li, b, strong, em, i, input, textarea, div[class*="Title"], div[class*="Desc"], div[class*="text"]) {
-        opacity: 1 !important;
-        text-shadow: 0 0 1px rgba(255,255,255,0.1) !important;
+      
+      /* 3. ТОТАЛЬНЫЙ ФИКС ТЕКСТА: заставляем абсолютно все буквы на сайте стать черными */
+      body *:not(#itd-custom-menu):not(#itd-game-window):not(#itd-game-window *) {
+        color: #1c1d1f !important;
+        -webkit-text-fill-color: #1c1d1f !important;
+        text-shadow: none !important;
       }
-      /* Адаптивное GUI для VK */
+      
+      /* 4. СПАСАЕМ АКТИВНЫЕ (ТЕМНЫЕ) ПЛАШКИ МЕНЮ (чтобы текст не сливался) */
+      /* Если у элемента в оригинале был прописан инлайн-стиль фона, оставляем текст белым */
+      body [style*="background"] *, [class*="active"] * {
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+      }
+      
+      /* Иконки в боковом меню */
+      aside svg {
+          fill: #1c1d1f !important;
+          color: #1c1d1f !important;
+      }
+      aside [style*="background"] svg, [class*="active"] svg {
+          fill: #ffffff !important;
+          color: #ffffff !important;
+      }
+      
+      /* 5. ПОЛЯ ВВОДА ("Что нового?") */
+      [contenteditable="true"], textarea, input {
+          background-color: #ffffff !important;
+          background: #ffffff !important;
+          color: #1c1d1f !important;
+          -webkit-text-fill-color: #1c1d1f !important;
+          border: 1px solid #d0d0d0 !important;
+      }
+      
+      /* 6. КНОПКИ */
+      button:not(#itd-custom-menu *):not(#itd-game-window *), .button {
+          border-color: #4a76a8 !important;
+          color: #4a76a8 !important;
+      }
+      button[class*="Primary"], .button.primary, button[type="submit"], [style*="background-color: rgb(255"] {
+          background-color: #4a76a8 !important;
+          background: #4a76a8 !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border: none !important;
+      }
+      
+      /* 7. ИЗОЛЯЦИЯ ЗМЕЙКИ И НАШЕГО МЕНЮ (не трогать!) */
       #itd-custom-menu, #itd-game-window {
-        filter: invert(1) hue-rotate(190deg) contrast(110%) !important;
+        background: #ffffff !important;
         border: 1px solid #e7e8ec !important;
         box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
       }
-      #itd-custom-menu *, #itd-game-window * {
+      #itd-custom-menu *, #itd-game-window *, #itd-game-window canvas {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
         font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif !important;
+        background: transparent !important;
       }
-      /* Возвращаем цвета ТОЛЬКО для фото, видео и аватарок. Иконки и логотипы (svg) пусть инвертируются в черный! */
-      img, video, [style*="background-image"], [class*="avatar"], [id*="avatar"], canvas {
-        filter: invert(1) hue-rotate(180deg) !important;
+      #itd-custom-menu button, #itd-game-window button {
+        background: #4a76a8 !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
       }
     `
     },
@@ -53,55 +104,61 @@ const THEMES = {
     telegram: {
         name: 'Telegram',
         css: `
-      html {
-        background: #000000 !important;
-        filter: invert(1) hue-rotate(180deg) contrast(115%) !important;
-        height: 100% !important;
+      html, body {
+        background: #eef2f5 !important;
       }
-      body {
-        background: #000000 !important;
+      body :is(div, article, aside, main, section, li, ul, [class*="Styled"]) {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        border-color: #e4e9f2 !important;
       }
-      body :is(h1, h2, h3, h4, h5, h6, p, span, a, li, b, strong, em, i, input, textarea, div[class*="Title"], div[class*="Desc"], div[class*="text"]) {
-        opacity: 1 !important;
+      body *:not(#itd-custom-menu):not(#itd-game-window):not(#itd-game-window *) {
+        color: #222222 !important;
+        -webkit-text-fill-color: #222222 !important;
       }
-      /* Адаптивное GUI для Telegram */
+      body [style*="background"] *, [class*="active"] * {
+          color: #ffffff !important;
+      }
+      [contenteditable="true"], textarea, input {
+          background-color: #ffffff !important;
+          color: #222222 !important;
+          border: 1px solid #e4e9f2 !important;
+      }
+      button:not(#itd-custom-menu *):not(#itd-game-window *), button[class*="Primary"] {
+        background: #2481cc !important;
+        color: #ffffff !important;
+      }
       #itd-custom-menu, #itd-game-window {
-        filter: invert(1) hue-rotate(165deg) brightness(1.02) !important;
+        background: #ffffff !important;
         border: 1px solid #e4e9f2 !important;
-      }
-      /* Иконки сайта (svg) не трогаем, чтобы они стали темными */
-      img, video, [style*="background-image"], [class*="avatar"], [id*="avatar"], canvas {
-        filter: invert(1) hue-rotate(180deg) !important;
       }
     `
     },
     itd_2024: {
         name: 'ИТД 2024',
         css: `
-      html {
-        background: #c0c0c0 !important;
-        filter: invert(0.85) sepia(0.2) contrast(120%) !important;
-        height: 100% !important;
-      }
-      body {
+      html, body {
         background: #c0c0c0 !important;
       }
-      body :is(h1, h2, h3, h4, h5, h6, p, span, a, li, b, strong, em, i, input, textarea, div[class*="Title"], div[class*="Desc"], div[class*="text"]) {
+      body :is(div, article, main, section, li, ul, [class*="Styled"]) {
+        background-color: #d4d4d4 !important;
+        border: 2px inset #ffffff !important;
+      }
+      body *:not(#itd-custom-menu):not(#itd-game-window):not(#itd-game-window *) {
         font-family: 'Courier New', monospace !important;
+        font-weight: 900 !important;
         color: #000000 !important;
-        -webkit-text-fill-color: #000000 !important;
-        opacity: 1 !important;
+      }
+      [contenteditable="true"], textarea, input {
+          background-color: #ffffff !important;
+          color: #000000 !important;
+          font-family: 'Courier New', monospace !important;
+          border: 2px inset #ffffff !important;
       }
       #itd-custom-menu, #itd-game-window {
-        filter: invert(1) sepia(0.1) contrast(140%) brightness(0.9) !important;
-        border: 3px outset #fff !important;
+        background: #d4d4d4 !important;
+        border: 3px outset #ffffff !important;
         border-radius: 0px !important;
-      }
-      body *, body *::before, body *::after {
-        font-family: 'Courier New', monospace !important;
-      }
-      img, video, [style*="background-image"], [class*="avatar"], [id*="avatar"], svg, canvas {
-        filter: invert(1) sepia(0) !important;
       }
     `
     },
